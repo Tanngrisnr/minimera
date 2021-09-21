@@ -2,29 +2,24 @@ import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 
-export default function Signup() {
+export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signup } = useAuth();
+  const { login } = useAuth();
   const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
-    }
-
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await login(emailRef.current.value, passwordRef.current.value);
       history.push("/");
     } catch {
-      setError("Failed to create an account");
+      setError("Failed to sign in");
     }
     setLoading(false);
   }
@@ -33,7 +28,7 @@ export default function Signup() {
     <>
       <div>
         <div>
-          <h2>Sign Up</h2>
+          <h2>Log in</h2>
           <form onSubmit={handleSubmit}>
             {error && <div>{error}</div>}
             <fieldset>
@@ -56,24 +51,14 @@ export default function Signup() {
                 required
               />
             </fieldset>
-            <fieldset>
-              <legend>Confirm Password</legend>
-              <input
-                type="password"
-                name="password-confirm"
-                id="password-confirm"
-                ref={passwordConfirmRef}
-                required
-              />
-            </fieldset>
             <button disabled={loading} type="submit">
-              Submit
+              Log in
             </button>
           </form>
         </div>
       </div>
       <div>
-        Already have an account? <Link to="/login">Log in.</Link>
+        Need an account? <Link to="/signup">Sign up.</Link>
       </div>
     </>
   );
