@@ -11,16 +11,28 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signup(email, password) {
+  const signup = (email, password) => {
     return auth.createUserWithEmailAndPassword(email, password);
-  }
+  };
 
-  function login(email, password) {
+  const login = (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
-  }
-  function logout() {
+  };
+  const logout = () => {
     return auth.signOut();
-  }
+  };
+
+  const resetPassword = (email) => {
+    return auth.sendPasswordResetEmail(email);
+  };
+
+  const updateEmail = (email) => {
+    currentUser.updateEmail(email);
+  };
+
+  const updatePassword = (password) => {
+    currentUser.updatePassword(password);
+  };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -35,6 +47,9 @@ export function AuthProvider({ children }) {
     login,
     signup,
     logout,
+    resetPassword,
+    updateEmail,
+    updatePassword,
   };
 
   return (
