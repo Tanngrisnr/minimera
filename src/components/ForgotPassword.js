@@ -1,26 +1,26 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function ForgotPassword() {
   const emailRef = useRef();
-  const passwordRef = useRef();
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
-  const history = useHistory();
+  const { resetPassword } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
+      setMessage("");
       setError("");
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
+      await resetPassword(emailRef.current.value);
       setLoading(false);
-      history.push("/");
+      setMessage("Check your email inbox for further instructions");
     } catch {
-      setError("Failed to sign in");
+      setError("Failed to reset");
     }
   }
 
@@ -30,6 +30,7 @@ export default function Login() {
         <h2>Log in</h2>
         <form onSubmit={handleSubmit}>
           {error && <div>{error}</div>}
+          {message && <div>{message}</div>}
           <fieldset>
             <legend>Email</legend>
             <input
@@ -40,22 +41,12 @@ export default function Login() {
               required
             />
           </fieldset>
-          <fieldset>
-            <legend>Password</legend>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              ref={passwordRef}
-              required
-            />
-          </fieldset>
           <button disabled={loading} type="submit">
-            Log in
+            Reset Password
           </button>
         </form>
         <div>
-          <Link to="/forgot-password">Forgot password?</Link>
+          <Link to="/login">Log in</Link>
         </div>
       </div>
       <div>
