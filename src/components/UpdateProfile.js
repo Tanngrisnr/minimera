@@ -8,7 +8,7 @@ export default function Signup() {
   const passwordConfirmRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { currentUser, updateEmail, updatePassword } = useAuth();
+  const { currentUser, emailUpdate, passwordUpdate } = useAuth();
   const history = useHistory();
 
   function handleSubmit(e) {
@@ -23,10 +23,10 @@ export default function Signup() {
     const promises = [];
 
     if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef.current.value));
+      promises.push(emailUpdate(emailRef.current.value));
     }
     if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value));
+      promises.push(passwordUpdate(passwordRef.current.value));
     }
     Promise.all(promises)
       .then(() => {
