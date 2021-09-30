@@ -7,10 +7,12 @@ export default function Profile() {
   const [error, setError] = useState("");
   const history = useHistory;
 
-  const handleLogout = async () => {
+  const handleLogout = async (e) => {
+    e.preventDefault();
     setError("");
 
     try {
+      setError("");
       await logout();
       history.push("/login");
     } catch {
