@@ -39,7 +39,6 @@ export function AuthProvider({ children }) {
         return user(authUser.user.uid).set({
           username,
           email,
-          ö,
         });
       }
     );
