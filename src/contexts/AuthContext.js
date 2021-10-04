@@ -8,7 +8,8 @@ import {
   updatePassword,
   signOut,
 } from "@firebase/auth";
-import { auth } from "./../Firebase";
+import { ref, set } from "firebase/database";
+import { auth, database } from "./../Firebase";
 
 const AuthContext = React.createContext();
 
@@ -20,8 +21,28 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  const signup = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  /*Users from database */
+  const user = (uid) => database.ref(`users/${uid}`);
+  const users = () => database.ref("users");
+
+  const writeUserData = (userId, name, email) => {
+    set(ref(database, "users/" + userId), {
+      username: name,
+      email: email,
+    });
+  };
+
+  const signup = (username, email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password).then(
+      (authUser) => {
+        // Create a user in your Firebase realtime database
+        return user(authUser.user.uid).set({
+          username,
+          email,
+          ö,
+        });
+      }
+    );
   };
 
   const login = (email, password) => {
@@ -42,14 +63,6 @@ export function AuthProvider({ children }) {
   const passwordUpdate = (password) => {
     updatePassword(auth.currentUser, password);
   };
-
-  /*   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      setLoading(false);
-    });
-    return unsubscribe;
-  }, []); */
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {

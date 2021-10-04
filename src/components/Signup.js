@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 
 export default function Signup() {
+  const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -21,7 +22,11 @@ export default function Signup() {
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signup(
+        usernameRef.current.value,
+        emailRef.current.value,
+        passwordRef.current.value
+      );
       setLoading(false);
       history.push("/");
     } catch {
@@ -36,6 +41,16 @@ export default function Signup() {
           <h2>Sign Up</h2>
           <form onSubmit={handleSubmit}>
             {error && <div>{error}</div>}
+            <fieldset>
+              <legend>Username</legend>
+              <input
+                type="username"
+                name="username"
+                id="username"
+                ref={usernameRef}
+                required
+              />
+            </fieldset>
             <fieldset>
               <legend>Email</legend>
               <input

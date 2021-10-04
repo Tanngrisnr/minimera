@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
 /* v9 compat packages are API compatible with v8 code */
 /* import firebase from "firebase/compat/app";
@@ -16,6 +17,8 @@ const app = initializeApp({
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 });
+
+export const database = getDatabase();
 
 export const auth = getAuth();
 
