@@ -6,6 +6,8 @@ import Profile from "./Profile";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
+import Dashboard from "./Dashboard";
+import CreateAd from "./CreateAd";
 
 function App() {
   return (
@@ -13,7 +15,9 @@ function App() {
       <Router>
         <AuthProvider>
           <Switch>
-            <PrivateRoute exact path="/" component={Profile} />
+            <PrivateRoute exact path="/" component={Dashboard} />
+            <PrivateRoute path="/create-ad" component={CreateAd} />
+            <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute path="/update-profile" component={UpdateProfile} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
