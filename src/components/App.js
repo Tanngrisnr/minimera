@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { AuthProvider } from "../contexts/AuthContext";
+import { DataProvider } from "../contexts/DataContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Signup from "./Signup";
 import Login from "./Login";
@@ -17,15 +18,17 @@ function App() {
     <main>
       <Router>
         <AuthProvider>
-          <Switch>
-            <PrivateRoute exact path="/" component={Dashboard} />
-            <PrivateRoute path="/create-ad" component={CreateAd} />
-            <PrivateRoute path="/profile" component={Profile} />
-            <PrivateRoute path="/update-profile" component={UpdateProfile} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
-            <Route path="/forgot-password" component={ForgotPassword} />
-          </Switch>
+          <DataProvider>
+            <Switch>
+              <PrivateRoute exact path="/" component={Dashboard} />
+              <PrivateRoute path="/create-ad" component={CreateAd} />
+              <PrivateRoute path="/profile" component={Profile} />
+              <PrivateRoute path="/update-profile" component={UpdateProfile} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/login" component={Login} />
+              <Route path="/forgot-password" component={ForgotPassword} />
+            </Switch>
+          </DataProvider>
         </AuthProvider>
       </Router>
     </main>

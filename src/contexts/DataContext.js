@@ -12,16 +12,18 @@ export const DataProvider = ({ children }) => {
   const [ads, setAds] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const getAds = async () => {
-    return getDocs(collection(db, "ads")).then((snapshot) => {
-      return (adlist = snapshot.docs.map((doc) => {
+  useEffect(() => {
+    getDocs(collection(db, "ads")).then((snapshot) => {
+      let adlist = snapshot.docs.map((doc) => {
         return doc.data();
-      }));
+      });
+      setAds(adlist);
     });
-  };
-  const value = { getAds };
 
-  console.log(value);
+    setLoading(false);
+  }, []);
+  const value = { ads };
+
   return (
     <DataContext.Provider value={value}>
       {!loading && children}
