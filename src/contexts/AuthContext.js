@@ -9,7 +9,6 @@ import {
   updatePassword,
   signOut,
 } from "@firebase/auth";
-import { collection, addDoc, getDocs } from "firebase/firestore";
 import { auth } from "./../Firebase";
 
 const AuthContext = React.createContext();

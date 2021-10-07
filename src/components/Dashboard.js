@@ -1,16 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { collection, addDoc, getDocs } from "firebase/firestore";
-import { db } from "../Firebase";
+import { useData } from "../contexts/DataContext";
 
 export default function Dashboard() {
-  const ads = getDocs(collection(db, "ads")).then((snapshot) => {
-    snapshot.docs.map((doc) => {
-      return doc.data;
-    });
-  });
-  console.log(ads);
-
+  //const { ads } = useData();
   return (
     <div>
       <h2>Dashboard</h2>

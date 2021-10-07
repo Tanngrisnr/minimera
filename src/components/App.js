@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Signup from "./Signup";
@@ -8,6 +9,8 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import Dashboard from "./Dashboard";
 import CreateAd from "./CreateAd";
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import { db } from "../Firebase";
 
 function App() {
   return (
