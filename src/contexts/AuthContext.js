@@ -48,7 +48,7 @@ export function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user);
-        !user.emailVerified && sendEmailVerification(auth.currentUser);
+        //!user.emailVerified && sendEmailVerification(auth.currentUser);
       } else {
         setCurrentUser(null);
       }

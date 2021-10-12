@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { AuthProvider } from "../contexts/AuthContext";
 import { DataProvider } from "../contexts/DataContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -10,8 +9,7 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import Dashboard from "./Dashboard";
 import CreateAd from "./CreateAd";
-import { collection, addDoc, getDocs } from "firebase/firestore";
-import { db } from "../Firebase";
+import Navigation from "./Navigation";
 
 function App() {
   return (
@@ -28,6 +26,7 @@ function App() {
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
             </Switch>
+            <Navigation />
           </DataProvider>
         </AuthProvider>
       </Router>

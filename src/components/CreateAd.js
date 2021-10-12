@@ -1,10 +1,12 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import { useData } from "./../contexts/DataContext";
 
 export default function CreateAd() {
   const titleRef = useRef();
   const { currentUser } = useAuth();
+  const { newAd } = useData();
   const descriptionRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,10 +18,11 @@ export default function CreateAd() {
     try {
       setError("");
       setLoading(true);
-      console.log(
+      newAd(
+        currentUser.uid,
+        currentUser.email,
         titleRef.current.value,
-        descriptionRef.current.value,
-        currentUser.email
+        descriptionRef.current.value
       );
       setLoading(false);
       history.push("/");
