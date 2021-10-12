@@ -25,7 +25,12 @@ export const DataProvider = ({ children }) => {
     const data = getDocs(collection(db, "ads")).then((snapshot) => {
       console.log("hello from useEffect");
       let adlist = snapshot.docs.map((doc) => {
-        return doc;
+        return {
+          adID: doc.id,
+          creatorID: doc.data().creatorID,
+          title: doc.data().title,
+          description: doc.data().description,
+        };
       });
       setAds(adlist);
       setLoading(false);
