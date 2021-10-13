@@ -35,9 +35,7 @@ export const DataProvider = ({ children }) => {
       setAds(adlist);
       setLoading(false);
     });
-    return () => {
-      data();
-    };
+    return data;
   }, []);
   const value = { ads, newAd };
 

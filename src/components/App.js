@@ -10,6 +10,7 @@ import UpdateProfile from "./UpdateProfile";
 import Dashboard from "./Dashboard";
 import CreateAd from "./CreateAd";
 import Navigation from "./Navigation";
+import About from "./About";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <DataProvider>
             <Switch>
               <PrivateRoute exact path="/" component={Dashboard} />
+              <PrivateRoute path="about" component={About} />
               <PrivateRoute path="/create-ad" component={CreateAd} />
               <PrivateRoute path="/profile" component={Profile} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />

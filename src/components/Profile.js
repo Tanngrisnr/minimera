@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 export default function Profile() {
   const { currentUser, logout } = useAuth();
   const [error, setError] = useState("");
-  const history = useHistory;
+  const history = useHistory();
 
   const handleLogout = async (e) => {
     e.preventDefault();

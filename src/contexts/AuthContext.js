@@ -9,7 +9,8 @@ import {
   updatePassword,
   signOut,
 } from "@firebase/auth";
-import { auth } from "./../Firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { auth, db } from "./../Firebase";
 
 const AuthContext = React.createContext();
 
@@ -21,8 +22,20 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  const signup = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const signup = (email, password, group, username) => {
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        setDoc(doc(db, "users", user.uid), {
+          username: username,
+          group: group,
+          email: user.email,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const login = (email, password) => {
@@ -45,14 +58,27 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      if (authUser) {
+        const docRef = doc(db, "users", authUser.uid);
+        getDoc(docRef)
+          .then((dbUser) => {
+            console.log(dbUser);
+            setCurrentUser({
+              ...authUser,
+              ...dbUser.data(),
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            setCurrentUser({ authUser, group: "north" });
+          });
         //!user.emailVerified && sendEmailVerification(auth.currentUser);
       } else {
         setCurrentUser(null);
       }
       setLoading(false);
+      console.log(authUser);
     });
     return () => {
       unsubscribe();
