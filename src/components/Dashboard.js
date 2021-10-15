@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import ListAds from "./ListAds";
 import { useAuth } from "../contexts/AuthContext";
+import { useData } from "../contexts/DataContext";
 export default function Dashboard() {
   const { currentUser } = useAuth();
-  console.log(currentUser);
+  const { ads } = useData();
   return (
     <div>
       <h2>Dashboard</h2>
-      <ListAds />
+      <ListAds
+        ads={ads.filter((ad) => {
+          return ad.group === currentUser.group;
+        })}
+      />
     </div>
   );
 }

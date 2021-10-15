@@ -18,7 +18,7 @@ export default function Login() {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       setLoading(false);
-      setTimeout(history.push("/"), 1000);
+      history.push("/");
     } catch {
       setError("Failed to sign in");
     }

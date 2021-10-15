@@ -22,7 +22,8 @@ export default function CreateAd() {
         currentUser.uid,
         currentUser.email,
         titleRef.current.value,
-        descriptionRef.current.value
+        descriptionRef.current.value,
+        currentUser.group
       );
       setLoading(false);
       history.push("/");
