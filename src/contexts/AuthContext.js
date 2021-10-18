@@ -12,12 +12,14 @@ import {
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, db } from "./../Firebase";
 
+//Skapar context och custom hook för att använda autoriseringsfunktioner i komponenter
 const AuthContext = React.createContext();
 
 export function useAuth() {
   return useContext(AuthContext);
 }
-
+//custom context-provider som bidrar med funktioner för att göra saker som att skapa nya användare logga in.
+//innehåller även en listener som håller koll på om ny användare har skapats och synkroniserar firebase auth med firestore.
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
@@ -73,12 +75,12 @@ export function AuthProvider({ children }) {
             console.log(error);
             setCurrentUser({ authUser, group: "north" });
           });
+        //emailverifiering är avslagen under utvecklingsfas då ogiltiga mailadresser krashar sidan.
         //!user.emailVerified && sendEmailVerification(auth.currentUser);
       } else {
         setCurrentUser(null);
       }
       setLoading(false);
-      console.log(authUser);
     });
     return () => {
       unsubscribe();

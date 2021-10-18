@@ -1,6 +1,8 @@
+import React, { useEffect, useState } from "react";
 import { AuthProvider } from "../contexts/AuthContext";
 import { DataProvider } from "../contexts/DataContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Container } from "@mui/material";
 import Signup from "./Signup";
 import Login from "./Login";
 import Profile from "./Profile";
@@ -14,7 +16,7 @@ import About from "./About";
 
 function App() {
   return (
-    <main>
+    <Container>
       <Router>
         <AuthProvider>
           <DataProvider>
@@ -32,7 +34,7 @@ function App() {
           </DataProvider>
         </AuthProvider>
       </Router>
-    </main>
+    </Container>
   );
 }
 
