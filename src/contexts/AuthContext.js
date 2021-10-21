@@ -65,7 +65,6 @@ export function AuthProvider({ children }) {
         const docRef = doc(db, "users", authUser.uid);
         getDoc(docRef)
           .then((dbUser) => {
-            console.log(dbUser);
             setCurrentUser({
               ...authUser,
               ...dbUser.data(),
@@ -73,7 +72,6 @@ export function AuthProvider({ children }) {
           })
           .catch((error) => {
             console.log(error);
-            setCurrentUser({ authUser, group: "north" });
           });
         //emailverifiering är avslagen under utvecklingsfas då ogiltiga mailadresser krashar sidan.
         //!user.emailVerified && sendEmailVerification(auth.currentUser);

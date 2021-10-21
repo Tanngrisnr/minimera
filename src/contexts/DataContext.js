@@ -7,7 +7,6 @@ import {
   deleteDoc,
   doc,
   query,
-  where,
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "./../Firebase";
@@ -40,7 +39,6 @@ export const DataProvider = ({ children }) => {
   //funktionen inom useEffect hämtar data/annonser en gång när sidan laddas om
   useEffect(() => {
     const data = getDocs(collection(db, "ads")).then((snapshot) => {
-      console.log("hello from useEffect");
       let adlist = snapshot.docs.map((doc) => {
         return {
           adID: doc.id,
@@ -53,7 +51,9 @@ export const DataProvider = ({ children }) => {
       setAds(adlist);
       setLoading(false);
     });
-    return data;
+    return () => {
+      data();
+    };
   }, []);
 
   //useEffect updaterar datan/annonser i realtime när förändringar sker i databasen
@@ -70,17 +70,14 @@ export const DataProvider = ({ children }) => {
           group: doc.data().group,
         });
       });
-      console.log(
-        listedAds.map((ad) => {
-          return ad;
-        })
-      );
+
       setAds(listedAds);
+      setLoading(false);
     });
     return () => {
       unsubscribe();
     };
-  }, [db]);
+  }, []);
 
   const value = { ads, newAd, deleteAd };
   //returnerar en contextprovider som tar emot funktioner samt en lista över data som kan användas i applikationen.

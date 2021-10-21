@@ -30,7 +30,7 @@ export default function Signup() {
         usernameRef.current.value
       );
       setLoading(false);
-      history.push("/");
+      setTimeout(history.push("/"), 3000);
     } catch {
       setError("Failed to create an account");
     }

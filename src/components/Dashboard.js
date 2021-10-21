@@ -5,6 +5,7 @@ import { useData } from "../contexts/DataContext";
 export default function Dashboard() {
   const { currentUser } = useAuth();
   const { ads } = useData();
+  console.log(currentUser);
   return (
     <div>
       <h2>Dashboard</h2>
