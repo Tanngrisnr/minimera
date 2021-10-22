@@ -1,9 +1,6 @@
-import React from "react";
-import { AuthProvider } from "../contexts/AuthContext";
-import { DataProvider } from "../contexts/DataContext";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Switch, Route, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import Signup from "./Signup";
 import Login from "./Login";
@@ -16,7 +13,8 @@ import CreateAd from "./CreateAd";
 import Navigation from "./Navigation";
 import AdPage from "./AdPage";
 import About from "./About";
-import { createGlobalStyle } from "styled-components";
+import Landing from "./Landing";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 const FullSize = createGlobalStyle`
 
@@ -24,6 +22,8 @@ const FullSize = createGlobalStyle`
   html, body {
     margin: 0;
     padding: 0;
+    background-color: ${({ isLanding, theme }) =>
+      isLanding ? theme.primary : "white"};
   }
 *, *::after, *::before {
     box-sizing: border-box;
@@ -42,75 +42,51 @@ const FullSize = createGlobalStyle`
 `;
 
 const StyledMain = styled.main`
+  color: ${({ islanding }) => (islanding ? "white" : null)};
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   width: 100%;
 `;
 
-const themeConfig = createTheme({
-  palette: {
-    primary: {
-      main: "#0A8B74",
-      light: "#EBF4F3",
-    },
-  },
-  typography: {
-    h1: {
-      fontFamily: '"Belleza", "Helvetica", "Arial", sans-serif',
-      fontWeight: 400,
-    },
-    h2: {
-      fontFamily: '"Belleza", "Helvetica", "Arial", sans-serif',
-      fontWeight: 400,
-    },
-    h3: {
-      fontWeight: 700,
-    },
-    h4: {
-      fontWeight: 700,
-    },
-    h5: {
-      fontWeight: 700,
-    },
-    body1: {
-      fontSize: 14,
-    },
-    body2: {
-      fontSize: 16,
-    },
-  },
-});
+const appTheme = {
+  primary: "#0A8B74",
+};
 
 function App() {
+  const location = useLocation();
+  const [isLanding, setIsLanding] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname === "/landing") {
+      setIsLanding(true);
+    } else {
+      setIsLanding(false);
+    }
+    console.log(isLanding);
+  }, [location]);
+
   return (
-    <AuthProvider>
-      <DataProvider>
-        <CssBaseline />
-        <ThemeProvider theme={themeConfig}>
-          <FullSize />
-          <StyledMain>
-            <Router>
-              <Switch>
-                <PrivateRoute exact path="/" component={Dashboard} />
-                <PrivateRoute path="about" component={About} />
-                <PrivateRoute path="/create-ad" component={CreateAd} />
-                <PrivateRoute path="/profile" component={Profile} />
-                <PrivateRoute
-                  path="/update-profile"
-                  component={UpdateProfile}
-                />
-                <PrivateRoute path="/ad/:id" component={AdPage} />
-                <Route path="/signup" component={Signup} />
-                <Route path="/login" component={Login} />
-                <Route path="/forgot-password" component={ForgotPassword} />
-              </Switch>
-              <Navigation />
-            </Router>
-          </StyledMain>
-        </ThemeProvider>
-      </DataProvider>
-    </AuthProvider>
+    <>
+      <ThemeProvider theme={appTheme}>
+        <FullSize isLanding={isLanding} />
+        <StyledMain>
+          <Switch>
+            <PrivateRoute exact path="/" component={Dashboard} />
+            <PrivateRoute path="/about" component={About} />
+            <PrivateRoute path="/create-ad" component={CreateAd} />
+            <PrivateRoute path="/profile" component={Profile} />
+            <PrivateRoute path="/update-profile" component={UpdateProfile} />
+            <PrivateRoute path="/ad/:id" component={AdPage} />
+            <Route path="/landing" component={Landing} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+            <Route path="/forgot-password" component={ForgotPassword} />
+          </Switch>
+          <Navigation />
+        </StyledMain>
+      </ThemeProvider>
+    </>
   );
 }
 

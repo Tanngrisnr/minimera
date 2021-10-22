@@ -46,7 +46,7 @@ function AdItem({ ad }) {
   return (
     <AdCard>
       <header>
-        <Typography variant="h5">{ad.title}</Typography>{" "}
+        <h5>{ad.title}</h5>{" "}
         {currentUser.uid === ad.adID ? (
           <button disabled={loading} onClick={handleDelete}>
             X
@@ -54,10 +54,8 @@ function AdItem({ ad }) {
         ) : null}
       </header>
       {error && <div>{error}</div>}
-      <Typography variant="body1">{ad.description}</Typography>
-      <Button component={Link} to={"/ad/" + ad.adID}>
-        show full ad
-      </Button>
+      <p>{ad.description}</p>
+      <Link to={"/ad/" + ad.adID}>show full ad</Link>
     </AdCard>
   );
 }
