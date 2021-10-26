@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-
+import { StyledForm } from "./styles";
 export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -40,51 +40,49 @@ export default function Signup() {
 
   return (
     <>
-      <div>
+      <StyledForm>
+        <h2>Updatera profil</h2>
+        <form onSubmit={handleSubmit}>
+          {error && <div>{error}</div>}
+          <fieldset>
+            <legend>Email</legend>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              ref={emailRef}
+              defaultValue={currentUser.email}
+              required
+            />
+          </fieldset>
+          <fieldset>
+            <legend>Lösenord</legend>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              ref={passwordRef}
+              placeholder="Lämna blank för att behålla ditt lösenord"
+            />
+          </fieldset>
+          <fieldset>
+            <legend>Bekräfta lösenord</legend>
+            <input
+              type="password"
+              name="password-confirm"
+              id="password-confirm"
+              ref={passwordConfirmRef}
+              placeholder="Lämna blank för att behålla ditt lösenord"
+            />
+          </fieldset>
+          <button disabled={loading} type="submit">
+            Updatera
+          </button>
+        </form>
         <div>
-          <h2>Update Profile </h2>
-          <form onSubmit={handleSubmit}>
-            {error && <div>{error}</div>}
-            <fieldset>
-              <legend>Email</legend>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                ref={emailRef}
-                defaultValue={currentUser.email}
-                required
-              />
-            </fieldset>
-            <fieldset>
-              <legend>Password</legend>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                ref={passwordRef}
-                placeholder="Leave blank to keep the same"
-              />
-            </fieldset>
-            <fieldset>
-              <legend>Confirm Password</legend>
-              <input
-                type="password"
-                name="password-confirm"
-                id="password-confirm"
-                ref={passwordConfirmRef}
-                placeholder="Leave blank to keep the same"
-              />
-            </fieldset>
-            <button disabled={loading} type="submit">
-              Submit
-            </button>
-          </form>
+          <Link to="/">Avbryt</Link>
         </div>
-      </div>
-      <div>
-        <Link to="/">Cancel.</Link>
-      </div>
+      </StyledForm>
     </>
   );
 }

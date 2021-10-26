@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
-import { CssBaseline } from "@mui/material";
 import Signup from "./Signup";
 import Login from "./Login";
 import Profile from "./Profile";
@@ -14,7 +15,14 @@ import Navigation from "./Navigation";
 import AdPage from "./AdPage";
 import About from "./About";
 import Landing from "./Landing";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+
+const themeConfig = createTheme({
+  palette: {
+    primary: {
+      main: "#0A8B74",
+    },
+  },
+});
 
 const FullSize = createGlobalStyle`
 
@@ -22,8 +30,10 @@ const FullSize = createGlobalStyle`
   html, body {
     margin: 0;
     padding: 0;
-    background-color: ${({ isLanding, theme }) =>
-      isLanding ? theme.primary : "white"};
+    font-family: 'Roboto', 'Helvetica', sans-serif;
+    color: ${({ isLanding }) => (isLanding ? "white" : "black")};
+    width: 100vw;
+    height: 100vh;
   }
 *, *::after, *::before {
     box-sizing: border-box;
@@ -33,9 +43,24 @@ const FullSize = createGlobalStyle`
     display: flex;
     justify-content: center;
     align-items: stretch;
-    height: 100vh;
     text-rendering: optimizeLegibility;
+    background-color: ${({ isLanding }) => (isLanding ? "#0A8B74" : "white")};
 
+  }
+  h1, h2 { 
+    font-family: 'Belleza', serif;
+    font-weight:400;
+    text-align:center;
+    width:100%;
+  }
+  h2 {
+    font-size:2.5rem;
+  }
+  a {
+    color: "#0A8B74";
+  }
+  a:visited {
+    color: "#076151";
   }
 
 
@@ -46,12 +71,11 @@ const StyledMain = styled.main`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  width: 100%;
+  width: 95%;
+  margin: 0 auto;
+  height: 100%;
+  justify-content: center;
 `;
-
-const appTheme = {
-  primary: "#0A8B74",
-};
 
 function App() {
   const location = useLocation();
@@ -64,11 +88,11 @@ function App() {
       setIsLanding(false);
     }
     console.log(isLanding);
-  }, [location]);
+  }, [location, isLanding]);
 
   return (
     <>
-      <ThemeProvider theme={appTheme}>
+      <ThemeProvider theme={themeConfig}>
         <FullSize isLanding={isLanding} />
         <StyledMain>
           <Switch>

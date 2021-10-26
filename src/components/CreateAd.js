@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { useData } from "./../contexts/DataContext";
+import { Button } from "@mui/material";
 
 export default function CreateAd() {
   const titleRef = useRef();
@@ -34,37 +35,30 @@ export default function CreateAd() {
 
   return (
     <>
+      <form onSubmit={handleSubmit}>
+        {error && <div>{error}</div>}
+        <fieldset>
+          <legend>Title</legend>
+          <input type="text" name="title" id="title" ref={titleRef} required />
+        </fieldset>
+        <fieldset>
+          <legend>Description</legend>
+          <textarea
+            rows="4"
+            cols="50"
+            type="text"
+            name="description"
+            id="description"
+            ref={descriptionRef}
+            required
+          />
+        </fieldset>
+        <Button fullWidth variant="contained" disabled={loading} type="submit">
+          Create
+        </Button>
+      </form>
       <div>
-        <h2>Create an ad</h2>
-        <form onSubmit={handleSubmit}>
-          {error && <div>{error}</div>}
-          <fieldset>
-            <legend>Title</legend>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              ref={titleRef}
-              required
-            />
-          </fieldset>
-          <fieldset>
-            <legend>Description</legend>
-            <input
-              type="text"
-              name="description"
-              id="description"
-              ref={descriptionRef}
-              required
-            />
-          </fieldset>
-          <button disabled={loading} type="submit">
-            Create
-          </button>
-        </form>
-        <div>
-          <Link to="/">Cancel</Link>
-        </div>
+        <Link to="/">avbryt</Link>
       </div>
     </>
   );

@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import { StyledForm } from "./styles";
+import { Button } from "@mui/material";
 
 export default function Login() {
   const emailRef = useRef();
@@ -26,7 +28,7 @@ export default function Login() {
 
   return (
     <>
-      <div>
+      <StyledForm>
         <h2>Log in</h2>
         <form onSubmit={handleSubmit}>
           {error && <div>{error}</div>}
@@ -41,7 +43,7 @@ export default function Login() {
             />
           </fieldset>
           <fieldset>
-            <legend>Password</legend>
+            <legend>Lösenord</legend>
             <input
               type="password"
               name="password"
@@ -50,17 +52,22 @@ export default function Login() {
               required
             />
           </fieldset>
-          <button disabled={loading} type="submit">
-            Log in
-          </button>
+          <Button
+            fullWidth
+            variant="contained"
+            disabled={loading}
+            type="submit"
+          >
+            Logga in
+          </Button>
         </form>
         <div>
-          <Link to="/forgot-password">Forgot password?</Link>
+          <Link to="/forgot-password">Glömt lösenord?</Link>
         </div>
-      </div>
-      <div>
-        Need an account? <Link to="/signup">Sign up.</Link>
-      </div>
+        <footer>
+          Har du ej konto? <Link to="/signup">Sign up.</Link>
+        </footer>
+      </StyledForm>
     </>
   );
 }

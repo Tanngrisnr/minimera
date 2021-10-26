@@ -6,15 +6,6 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import PersonIcon from "@mui/icons-material/Person";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-const themeConfig = createTheme({
-  palette: {
-    primary: {
-      main: "#0A8B74",
-    },
-  },
-});
 
 export default function Navigation() {
   const { currentUser } = useAuth();
@@ -26,48 +17,46 @@ export default function Navigation() {
   }, [location]);
   if (currentUser) {
     return (
-      <ThemeProvider theme={themeConfig}>
-        <Paper
-          sx={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            right: 0,
-          }}
-          elevation={3}
-        >
-          <BottomNavigation value={currentRoute}>
-            <BottomNavigationAction
-              component={Link}
-              to="/"
-              value="/"
-              label="Hem"
-              icon={<HomeIcon />}
-            />
-            <BottomNavigationAction
-              component={Link}
-              value="/create-ad"
-              to="create-ad"
-              label="Annons"
-              icon={<AddCircleIcon />}
-            />
-            <BottomNavigationAction
-              component={Link}
-              value="/about"
-              to="about"
-              label="Om"
-              icon={<InfoIcon />}
-            />
-            <BottomNavigationAction
-              component={Link}
-              value="/profile"
-              to="profile"
-              label="Profil"
-              icon={<PersonIcon />}
-            />
-          </BottomNavigation>
-        </Paper>
-      </ThemeProvider>
+      <Paper
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}
+        elevation={3}
+      >
+        <BottomNavigation value={currentRoute}>
+          <BottomNavigationAction
+            component={Link}
+            to="/"
+            value="/"
+            label="Hem"
+            icon={<HomeIcon />}
+          />
+          <BottomNavigationAction
+            component={Link}
+            value="/create-ad"
+            to="create-ad"
+            label="Annons"
+            icon={<AddCircleIcon />}
+          />
+          <BottomNavigationAction
+            component={Link}
+            value="/about"
+            to="about"
+            label="Om"
+            icon={<InfoIcon />}
+          />
+          <BottomNavigationAction
+            component={Link}
+            value="/profile"
+            to="profile"
+            label="Profil"
+            icon={<PersonIcon />}
+          />
+        </BottomNavigation>
+      </Paper>
     );
   } else {
     return null;

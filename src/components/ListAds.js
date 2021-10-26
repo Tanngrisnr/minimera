@@ -2,27 +2,37 @@ import React, { useState } from "react";
 import { useData } from "../contexts/DataContext";
 import { Link } from "react-router-dom";
 import { useAuth } from "./../contexts/AuthContext";
-import {
-  Card,
-  CardActions,
-  CardContent,
-  Button,
-  Typography,
-  IconButton,
-} from "@mui/material";
+import { IconButton } from "@mui/material";
 import styled from "styled-components";
 
 const AdCard = styled.article`
-  width: 48%;
+  margin: 2%;
+  flex-basis: 46%;
   background-color: #ebf4f3;
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
+  flex-grow: 0;
+
+  p {
+    max-height: 78px;
+    overflow: hidden;
+  }
+
+  header {
+    h5 {
+      padding: 0;
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  }
 `;
 
 const AdsContainer = styled.div`
+  align-content: flex-start;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
 `;
 
 function AdItem({ ad }) {

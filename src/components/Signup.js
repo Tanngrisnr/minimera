@@ -1,9 +1,11 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import { Button } from "@mui/material";
+
+import { StyledForm } from "./styles";
 
 export default function Signup() {
-  const usernameRef = useRef();
   const groupRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -26,33 +28,22 @@ export default function Signup() {
       await signup(
         emailRef.current.value,
         passwordRef.current.value,
-        groupRef.current.value,
-        usernameRef.current.value
+        groupRef.current.value
       );
       setLoading(false);
       setTimeout(history.push("/"), 3000);
     } catch {
-      setError("Failed to create an account");
+      setError("Kunde ej skapa konto");
     }
   }
 
   return (
     <>
-      <div>
+      <StyledForm>
         <div>
-          <h2>Sign Up</h2>
           <form onSubmit={handleSubmit}>
             {error && <div>{error}</div>}
-            <fieldset>
-              <legend>Username</legend>
-              <input
-                type="username"
-                name="username"
-                id="username"
-                ref={usernameRef}
-                required
-              />
-            </fieldset>
+
             <fieldset>
               <legend>Email</legend>
               <input
@@ -64,7 +55,7 @@ export default function Signup() {
               />
             </fieldset>
             <fieldset>
-              <legend>Password</legend>
+              <legend>Lösenord</legend>
               <input
                 type="password"
                 name="password"
@@ -74,7 +65,7 @@ export default function Signup() {
               />
             </fieldset>
             <fieldset>
-              <legend>Confirm Password</legend>
+              <legend>Bekräfta lösenord</legend>
               <input
                 type="password"
                 name="password-confirm"
@@ -84,7 +75,7 @@ export default function Signup() {
               />
             </fieldset>
             <fieldset>
-              <legend>Select group</legend>
+              <legend>Välj grupp</legend>
 
               <select ref={groupRef} name="group" id="group">
                 <option value="north">Norr</option>
@@ -93,15 +84,20 @@ export default function Signup() {
                 <option value="west">Väst</option>
               </select>
             </fieldset>
-            <button disabled={loading} type="submit">
-              Submit
-            </button>
+            <Button
+              fullWidth
+              variant="contained"
+              disabled={loading}
+              type="submit"
+            >
+              Skapa konto
+            </Button>
           </form>
         </div>
-      </div>
-      <div>
-        Already have an account? <Link to="/login">Log in.</Link>
-      </div>
+        <div>
+          Already have an account? <Link to="/login">Log in.</Link>
+        </div>
+      </StyledForm>
     </>
   );
 }
