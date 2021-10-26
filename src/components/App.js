@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
+
+import { Global, css } from "@emotion/react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import Signup from "./Signup";
 import Login from "./Login";
 import Profile from "./Profile";
@@ -24,37 +25,37 @@ const themeConfig = createTheme({
   },
 });
 
-const FullSize = createGlobalStyle`
-
- 
-  html, body {
+const GlobaStyles = ({ isLanding }) => css`
+  html,
+  body {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', 'Helvetica', sans-serif;
-    color: ${({ isLanding }) => (isLanding ? "white" : "black")};
+    font-family: "Roboto", "Helvetica", sans-serif;
     width: 100vw;
     height: 100vh;
   }
-*, *::after, *::before {
+  *,
+  *::after,
+  *::before {
     box-sizing: border-box;
-
   }
- body {
+  body {
     display: flex;
     justify-content: center;
     align-items: stretch;
     text-rendering: optimizeLegibility;
-    background-color: ${({ isLanding }) => (isLanding ? "#0A8B74" : "white")};
-
+    ${isLanding ? `background-color: #0A8B74` : `background-color: white`};
+    ${isLanding ? `color:white` : `color:black`};
   }
-  h1, h2 { 
-    font-family: 'Belleza', serif;
-    font-weight:400;
-    text-align:center;
-    width:100%;
+  h1,
+  h2 {
+    font-family: "Belleza", serif;
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
   }
   h2 {
-    font-size:2.5rem;
+    font-size: 2.5rem;
   }
   a {
     color: "#0A8B74";
@@ -62,12 +63,9 @@ const FullSize = createGlobalStyle`
   a:visited {
     color: "#076151";
   }
-
-
 `;
 
 const StyledMain = styled.main`
-  color: ${({ islanding }) => (islanding ? "white" : null)};
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -93,7 +91,7 @@ function App() {
   return (
     <>
       <ThemeProvider theme={themeConfig}>
-        <FullSize isLanding={isLanding} />
+        <Global styles={GlobaStyles({ isLanding })} isLanding={isLanding} />
         <StyledMain>
           <Switch>
             <PrivateRoute exact path="/" component={Dashboard} />

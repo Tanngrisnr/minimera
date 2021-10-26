@@ -3,7 +3,7 @@ import { useData } from "../contexts/DataContext";
 import { Link } from "react-router-dom";
 import { useAuth } from "./../contexts/AuthContext";
 import { IconButton } from "@mui/material";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const AdCard = styled.article`
   margin: 2%;
