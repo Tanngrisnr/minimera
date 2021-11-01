@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useData } from "../contexts/DataContext";
-import { Link } from "react-router-dom";
+import { StyledLink } from "./styles";
 import { useAuth } from "./../contexts/AuthContext";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -80,7 +80,7 @@ function AdItem({ ad }) {
       </header>
       {error && <div>{error}</div>}
       <p>{ad.description}</p>
-      <Link to={"/ad/" + ad.adID}>show full ad</Link>
+      <StyledLink to={"/ad/" + ad.adID}>show full ad</StyledLink>
     </AdCard>
   );
 }

@@ -41,6 +41,7 @@ const GlobaStyles = ({ isLanding }) => css`
     box-sizing: border-box;
   }
   body {
+    overflow-x: hidden;
     display: flex;
     justify-content: center;
     align-items: stretch;
@@ -57,12 +58,6 @@ const GlobaStyles = ({ isLanding }) => css`
   }
   h2 {
     font-size: 2.5rem;
-  }
-  a {
-    color: #0a8b74;
-    :visited {
-      color: #076151;
-    }
   }
 `;
 

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import { StyledForm } from "./styles";
+import { StyledForm, StyledLink } from "./styles";
 import { Button } from "@mui/material";
 
 export default function Login() {
@@ -64,11 +64,12 @@ export default function Login() {
 
         <footer>
           <span>
-            Har du glömt ditt lösenord?
-            <Link to="/forgot-password">Återställ.</Link>
+            Har du glömt ditt lösenord?{" "}
+            <StyledLink to="/forgot-password">Återställ.</StyledLink>
           </span>
           <span>
-            Har du redan ett konto? <Link to="/signup">Skapa konto.</Link>
+            Har du redan ett konto?{" "}
+            <StyledLink to="/signup">Skapa konto.</StyledLink>
           </span>
         </footer>
       </StyledForm>

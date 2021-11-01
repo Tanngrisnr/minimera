@@ -2,8 +2,7 @@ import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { Button } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { StyledForm } from "./styles";
+import { StyledForm, StyledLink } from "./styles";
 
 export default function Signup() {
   const groupRef = useRef();
@@ -98,7 +97,7 @@ export default function Signup() {
         </div>
         <footer>
           <span>
-            Har du redan konto? <Link to="/login">Logga in.</Link>
+            Har du redan konto? <StyledLink to="/login">Logga in.</StyledLink>
           </span>
         </footer>
       </StyledForm>

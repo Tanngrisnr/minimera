@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { useData } from "./../contexts/DataContext";
 import { Button, TextareaAutosize } from "@mui/material";
-import { StyledForm } from "./styles";
+import { StyledForm, StyledLink } from "./styles";
 
 export default function CreateAd() {
   const titleRef = useRef();
@@ -75,7 +75,7 @@ export default function CreateAd() {
         </Button>
       </form>
       <footer>
-        <Link to="/">Avbryt</Link>
+        <StyledLink to="/">Avbryt</StyledLink>
       </footer>
     </StyledForm>
   );

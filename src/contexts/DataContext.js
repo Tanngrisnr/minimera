@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import {
   collection,
   addDoc,
+  setDoc,
   getDocs,
   deleteDoc,
   doc,
@@ -29,6 +30,13 @@ export const DataProvider = ({ children }) => {
       title: adTitle,
       description: adDescription,
       group: adGroup,
+    });
+  };
+
+  const updateUser = (uid, email, group) => {
+    setDoc(doc(db, "users", uid), {
+      email: email,
+      group: group,
     });
   };
 
@@ -79,7 +87,7 @@ export const DataProvider = ({ children }) => {
     };
   }, []);
 
-  const value = { loading, ads, newAd, deleteAd };
+  const value = { loading, ads, newAd, updateUser, deleteAd };
   //returnerar en contextprovider som tar emot funktioner samt en lista över data som kan användas i applikationen.
   //:addningsstatet hindrar barn av providern från att vissas innan all data har hämtats.
   return (

@@ -17,7 +17,7 @@ export const StyledForm = styled.div`
       border-radius: 4px;
       width: 100%;
       legend {
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
       input {
         all: unset;
@@ -48,5 +48,12 @@ export const StyledHeader = styled.header`
 
   h2 {
     width: 100%;
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  color: #0a8b74;
+  :visited {
+    color: #076151;
   }
 `;

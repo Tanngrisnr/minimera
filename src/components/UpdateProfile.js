@@ -1,14 +1,18 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
-import { StyledForm } from "./styles";
+import { useData } from "../contexts/DataContext";
+import { useHistory } from "react-router-dom";
+import { StyledForm, StyledLink } from "./styles";
+import { Button } from "@mui/material";
 export default function Signup() {
+  const groupRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { currentUser, emailUpdate, passwordUpdate } = useAuth();
+  const { updateUser } = useData();
   const history = useHistory();
 
   function handleSubmit(e) {
@@ -28,6 +32,15 @@ export default function Signup() {
     if (passwordRef.current.value) {
       promises.push(passwordUpdate(passwordRef.current.value));
     }
+    if (groupRef.current.value) {
+      promises.push(
+        updateUser(
+          currentUser.uid,
+          emailRef.current.value,
+          groupRef.current.value
+        )
+      );
+    }
     Promise.all(promises)
       .then(() => {
         history.push("/");
@@ -41,7 +54,6 @@ export default function Signup() {
   return (
     <>
       <StyledForm>
-        <h2>Updatera profil</h2>
         <form onSubmit={handleSubmit}>
           {error && <div>{error}</div>}
           <fieldset>
@@ -75,12 +87,30 @@ export default function Signup() {
               placeholder="Lämna blank för att behålla ditt lösenord"
             />
           </fieldset>
-          <button disabled={loading} type="submit">
-            Updatera
-          </button>
+
+          <select ref={groupRef} name="group" id="group">
+            <option selected disabled value={currentUser.group}>
+              Välj stadsdel
+            </option>
+            <option value="north">Norr</option>
+            <option value="west">Öst</option>
+            <option value="south">Söder</option>
+            <option value="west">Väst</option>
+          </select>
+          <label for="group">Välj ingen för att behålla nuvarande</label>
+
+          <Button
+            sx={{ marginTop: "10%" }}
+            fullWidth
+            variant="contained"
+            disabled={loading}
+            type="submit"
+          >
+            Updatera profil
+          </Button>
         </form>
         <div>
-          <Link to="/">Avbryt</Link>
+          <StyledLink to="/">Avbryt</StyledLink>
         </div>
       </StyledForm>
     </>

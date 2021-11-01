@@ -2,7 +2,6 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import { styled as materialStyled } from "@mui/material/styles";
 
 const LandingContainer = styled.div`
   display: flex;
