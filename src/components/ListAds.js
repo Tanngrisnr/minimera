@@ -13,18 +13,21 @@ const AdCard = styled.article`
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   flex-grow: 0;
+  padding: 5%;
 
   p {
     max-height: 78px;
     overflow: hidden;
+    font-size: 0.8rem;
   }
 
   header {
     display: flex;
+    align-content: center;
     h5 {
       padding: 0;
       margin: 1%;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: bold;
       flex-grow: 2;
     }
@@ -66,6 +69,7 @@ function AdItem({ ad }) {
         <h5>{ad.title}</h5>{" "}
         {currentUser.uid == ad.creatorID ? (
           <IconButton
+            size="small"
             sx={{ color: "black" }}
             disabled={loading}
             onClick={handleDelete}

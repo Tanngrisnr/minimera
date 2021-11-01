@@ -52,6 +52,7 @@ export default function Login() {
             />
           </fieldset>
           <Button
+            sx={{ marginTop: "10%" }}
             fullWidth
             variant="contained"
             disabled={loading}
@@ -60,11 +61,15 @@ export default function Login() {
             Logga in
           </Button>
         </form>
-        <div>
-          <Link to="/forgot-password">Glömt lösenord?</Link>
-        </div>
+
         <footer>
-          Har du ej konto? <Link to="/signup">Skapa konto.</Link>
+          <span>
+            Har du glömt ditt lösenord?
+            <Link to="/forgot-password">Återställ.</Link>
+          </span>
+          <span>
+            Har du redan ett konto? <Link to="/signup">Skapa konto.</Link>
+          </span>
         </footer>
       </StyledForm>
     </>

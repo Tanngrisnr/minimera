@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { useData } from "./../contexts/DataContext";
-import { Button } from "@mui/material";
+import { Button, TextareaAutosize } from "@mui/material";
 import { StyledForm } from "./styles";
 
 export default function CreateAd() {
@@ -39,7 +39,7 @@ export default function CreateAd() {
       <form onSubmit={handleSubmit}>
         {error && <div>{error}</div>}
         <fieldset>
-          <legend>Titel</legend>
+          <legend>Vad vill du låna ut?</legend>
           <input
             placeholder="Titel"
             type="text"
@@ -49,24 +49,34 @@ export default function CreateAd() {
             required
           />
         </fieldset>
+
         <fieldset>
-          <legend>Beskrivning</legend>
-          <textarea
+          <legend>Detaljer</legend>
+          <TextareaAutosize
+            minRows={4}
+            maxRows={20}
             type="text"
             name="description"
             id="description"
-            placeholder="Beskrivning"
+            placeholder="Skriv gärna vad den är och vilken märke/model.
+            Ex: Borrhammare (Bosch UNEO MAXX)."
             ref={descriptionRef}
             required
           />
         </fieldset>
-        <Button fullWidth variant="contained" disabled={loading} type="submit">
+        <Button
+          sx={{ marginTop: "10%" }}
+          fullWidth
+          variant="contained"
+          disabled={loading}
+          type="submit"
+        >
           Skapa annons
         </Button>
       </form>
-      <div>
-        <Link to="/">avbryt</Link>
-      </div>
+      <footer>
+        <Link to="/">Avbryt</Link>
+      </footer>
     </StyledForm>
   );
 }

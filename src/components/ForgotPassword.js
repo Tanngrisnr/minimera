@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 import { StyledForm } from "./styles";
 
 export default function ForgotPassword() {
@@ -41,9 +42,15 @@ export default function ForgotPassword() {
               required
             />
           </fieldset>
-          <button disabled={loading} type="submit">
+          <Button
+            sx={{ marginTop: "10%" }}
+            fullWidth
+            variant="contained"
+            disabled={loading}
+            type="submit"
+          >
             Återställ lösenord
-          </button>
+          </Button>
         </form>
         <div>
           <Link to="/login">Log in</Link>

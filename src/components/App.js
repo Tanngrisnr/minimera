@@ -59,10 +59,10 @@ const GlobaStyles = ({ isLanding }) => css`
     font-size: 2.5rem;
   }
   a {
-    color: "#0A8B74";
-  }
-  a:visited {
-    color: "#076151";
+    color: #0a8b74;
+    :visited {
+      color: #076151;
+    }
   }
 `;
 

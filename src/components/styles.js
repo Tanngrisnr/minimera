@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
 export const StyledForm = styled.div`
   width: 100%;
@@ -12,16 +13,15 @@ export const StyledForm = styled.div`
 
   form {
     fieldset {
+      margin-top: 10%;
       border-radius: 4px;
-      legend {
-        font-size: 0.8rem;
-      }
       width: 100%;
-      select {
-        width: 100%;
+      legend {
+        font-size: 1.2rem;
       }
       input {
         all: unset;
+        width: 100%;
       }
       textarea {
         all: unset;
@@ -30,15 +30,22 @@ export const StyledForm = styled.div`
         overflow: auto;
       }
     }
+    select {
+      margin-top: 5%;
+      border-radius: 4px;
+      min-width: 100%;
+    }
+  }
+  footer {
+    font-size: auto;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
 export const StyledHeader = styled.header`
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+
   h2 {
     width: 100%;
   }

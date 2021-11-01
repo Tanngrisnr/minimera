@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { Button } from "@mui/material";
-
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { StyledForm } from "./styles";
 
 export default function Signup() {
@@ -74,17 +74,19 @@ export default function Signup() {
                 required
               />
             </fieldset>
-            <fieldset>
-              <legend>Välj grupp</legend>
 
-              <select ref={groupRef} name="group" id="group">
-                <option value="north">Norr</option>
-                <option value="west">Öst</option>
-                <option value="south">Söder</option>
-                <option value="west">Väst</option>
-              </select>
-            </fieldset>
+            <select ref={groupRef} name="group" id="group">
+              <option selected disabled value="">
+                Välj stadsdel
+              </option>
+              <option value="north">Norr</option>
+              <option value="west">Öst</option>
+              <option value="south">Söder</option>
+              <option value="west">Väst</option>
+            </select>
+
             <Button
+              sx={{ marginTop: "10%" }}
               fullWidth
               variant="contained"
               disabled={loading}
@@ -94,9 +96,11 @@ export default function Signup() {
             </Button>
           </form>
         </div>
-        <div>
-          Har du redan ett konto? <Link to="/login">Logga in.</Link>
-        </div>
+        <footer>
+          <span>
+            Har du redan konto? <Link to="/login">Logga in.</Link>
+          </span>
+        </footer>
       </StyledForm>
     </>
   );
