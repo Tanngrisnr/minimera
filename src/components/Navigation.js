@@ -38,21 +38,21 @@ export default function Navigation() {
           <BottomNavigationAction
             component={Link}
             value="/create-ad"
-            to="create-ad"
+            to="/create-ad"
             label="Annons"
             icon={<AddCircleIcon />}
           />
           <BottomNavigationAction
             component={Link}
             value="/about"
-            to="about"
+            to="/about"
             label="Om"
             icon={<InfoIcon />}
           />
           <BottomNavigationAction
             component={Link}
             value="/profile"
-            to="profile"
+            to="/profile"
             label="Profil"
             icon={<PersonIcon />}
           />

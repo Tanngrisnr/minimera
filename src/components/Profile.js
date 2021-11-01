@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { useData } from "./../contexts/DataContext";
 import { Link, useHistory } from "react-router-dom";
 import { Button } from "@mui/material";
 import { StyledHeader } from "./styles";
+import ListAds from "./ListAds";
+import styled from "@emotion/styled";
+
+const ProfileContainer = styled.div`
+  margin-bottom: 10%;
+`;
 
 export default function Profile() {
   const { currentUser, logout } = useAuth();
+  const { ads } = useData();
   const [error, setError] = useState("");
   const history = useHistory();
 
@@ -24,7 +32,7 @@ export default function Profile() {
   return (
     <>
       <StyledHeader>Profile</StyledHeader>
-      <div>
+      <ProfileContainer>
         {error && <div>{error}</div>}
         <div>{currentUser.email}</div>
         <Button
@@ -44,7 +52,12 @@ export default function Profile() {
         >
           Logg ut
         </Button>
-      </div>
+      </ProfileContainer>
+      <ListAds
+        ads={ads.filter((ad) => {
+          return ad.creatorID === currentUser.uid;
+        })}
+      />
     </>
   );
 }

@@ -50,6 +50,7 @@ export const DataProvider = ({ children }) => {
       let adlist = snapshot.docs.map((doc) => {
         return {
           adID: doc.id,
+          creatorEmail: doc.data().creatorEmail,
           creatorID: doc.data().creatorID,
           title: doc.data().title,
           description: doc.data().description,

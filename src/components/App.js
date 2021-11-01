@@ -32,8 +32,6 @@ const GlobaStyles = ({ isLanding }) => css`
     margin: 0;
     padding: 0;
     font-family: "Roboto", "Helvetica", sans-serif;
-    width: 100vw;
-    min-height: 100vh;
   }
   *,
   *::after,
@@ -41,6 +39,8 @@ const GlobaStyles = ({ isLanding }) => css`
     box-sizing: border-box;
   }
   body {
+    width: 100vw;
+    min-height: 100vh;
     overflow-x: hidden;
     display: flex;
     justify-content: center;
