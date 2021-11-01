@@ -24,10 +24,10 @@ export const StyledForm = styled.div`
         width: 100%;
       }
       textarea {
-        all: unset;
         resize: none;
+        border: none;
+        outline: none;
         max-width: 100%;
-        overflow: auto;
       }
     }
     select {
