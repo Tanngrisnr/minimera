@@ -1,5 +1,10 @@
 import React from "react";
+import { StyledHeader } from "./styles";
 
 export default function About() {
-  return <h1>about page</h1>;
+  return (
+    <StyledHeader>
+      <h2>Hur funkar det?</h2>
+    </StyledHeader>
+  );
 }

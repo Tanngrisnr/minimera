@@ -64,27 +64,25 @@ export function AuthProvider({ children }) {
         const docRef = doc(db, "users", authUser.uid);
         getDoc(docRef)
           .then((dbUser) => {
-            setCurrentUser({
+            let user = {
               ...authUser,
               ...dbUser.data(),
-            });
+            };
+            setCurrentUser(user);
+            setLoading(false);
           })
           .catch((error) => {
             console.log(error);
           });
-        //emailverifiering är avslagen under utvecklingsfas då ogiltiga mailadresser krashar sidan.
-        //!user.emailVerified && sendEmailVerification(auth.currentUser);
       } else {
-        setCurrentUser(null);
+        setLoading(false);
       }
-      setLoading(false);
     });
-    return () => {
-      unsubscribe();
-    };
+    return unsubscribe();
   }, []);
 
   const value = {
+    loading,
     currentUser,
     login,
     signup,

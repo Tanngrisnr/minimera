@@ -3,6 +3,7 @@ import { useData } from "../contexts/DataContext";
 import { Link } from "react-router-dom";
 import { useAuth } from "./../contexts/AuthContext";
 import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import styled from "@emotion/styled";
 
 const AdCard = styled.article`
@@ -19,11 +20,16 @@ const AdCard = styled.article`
   }
 
   header {
+    display: flex;
     h5 {
       padding: 0;
-      margin: 0;
+      margin: 1%;
       font-size: 1.2rem;
       font-weight: bold;
+      flex-grow: 2;
+    }
+    button {
+      justify-self: flex-end;
     }
   }
 `;
@@ -33,6 +39,7 @@ const AdsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  max-width: 100%;
 `;
 
 function AdItem({ ad }) {
@@ -57,10 +64,14 @@ function AdItem({ ad }) {
     <AdCard>
       <header>
         <h5>{ad.title}</h5>{" "}
-        {currentUser.uid === ad.adID ? (
-          <button disabled={loading} onClick={handleDelete}>
-            X
-          </button>
+        {currentUser.uid == ad.creatorID ? (
+          <IconButton
+            sx={{ color: "black" }}
+            disabled={loading}
+            onClick={handleDelete}
+          >
+            <DeleteIcon />
+          </IconButton>
         ) : null}
       </header>
       {error && <div>{error}</div>}

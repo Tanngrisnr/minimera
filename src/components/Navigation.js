@@ -19,6 +19,7 @@ export default function Navigation() {
     return (
       <Paper
         sx={{
+          maxWidth: "100vw",
           position: "fixed",
           bottom: 0,
           left: 0,

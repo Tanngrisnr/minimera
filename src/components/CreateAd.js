@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { useData } from "./../contexts/DataContext";
 import { Button } from "@mui/material";
+import { StyledForm } from "./styles";
 
 export default function CreateAd() {
   const titleRef = useRef();
@@ -34,32 +35,38 @@ export default function CreateAd() {
   }
 
   return (
-    <>
+    <StyledForm>
       <form onSubmit={handleSubmit}>
         {error && <div>{error}</div>}
         <fieldset>
-          <legend>Title</legend>
-          <input type="text" name="title" id="title" ref={titleRef} required />
+          <legend>Titel</legend>
+          <input
+            placeholder="Titel"
+            type="text"
+            name="title"
+            id="title"
+            ref={titleRef}
+            required
+          />
         </fieldset>
         <fieldset>
-          <legend>Description</legend>
+          <legend>Beskrivning</legend>
           <textarea
-            rows="4"
-            cols="50"
             type="text"
             name="description"
             id="description"
+            placeholder="Beskrivning"
             ref={descriptionRef}
             required
           />
         </fieldset>
         <Button fullWidth variant="contained" disabled={loading} type="submit">
-          Create
+          Skapa annons
         </Button>
       </form>
       <div>
         <Link to="/">avbryt</Link>
       </div>
-    </>
+    </StyledForm>
   );
 }

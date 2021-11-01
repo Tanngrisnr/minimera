@@ -29,7 +29,6 @@ export default function Login() {
   return (
     <>
       <StyledForm>
-        <h2>Log in</h2>
         <form onSubmit={handleSubmit}>
           {error && <div>{error}</div>}
           <fieldset>
@@ -65,7 +64,7 @@ export default function Login() {
           <Link to="/forgot-password">Glömt lösenord?</Link>
         </div>
         <footer>
-          Har du ej konto? <Link to="/signup">Sign up.</Link>
+          Har du ej konto? <Link to="/signup">Skapa konto.</Link>
         </footer>
       </StyledForm>
     </>

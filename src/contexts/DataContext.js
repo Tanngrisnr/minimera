@@ -79,7 +79,7 @@ export const DataProvider = ({ children }) => {
     };
   }, []);
 
-  const value = { ads, newAd, deleteAd };
+  const value = { loading, ads, newAd, deleteAd };
   //returnerar en contextprovider som tar emot funktioner samt en lista över data som kan användas i applikationen.
   //:addningsstatet hindrar barn av providern från att vissas innan all data har hämtats.
   return (

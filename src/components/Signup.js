@@ -95,7 +95,7 @@ export default function Signup() {
           </form>
         </div>
         <div>
-          Already have an account? <Link to="/login">Log in.</Link>
+          Har du redan ett konto? <Link to="/login">Logga in.</Link>
         </div>
       </StyledForm>
     </>

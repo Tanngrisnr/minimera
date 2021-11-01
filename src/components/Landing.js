@@ -42,14 +42,6 @@ const LandingContainer = styled.div`
   }
 `;
 
-const LandingButton = materialStyled(Button)(({ theme }) => ({
-  color: theme.palette.primary,
-  backgroundColor: theme.palette.white,
-  "&:hover": {
-    backgroundColor: theme.palette.primary.dark,
-  },
-}));
-
 export default function Landing() {
   return (
     <LandingContainer>

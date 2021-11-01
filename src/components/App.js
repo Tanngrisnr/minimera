@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
-
 import { Global, css } from "@emotion/react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { AuthProvider } from "../contexts/AuthContext";
+import { DataProvider } from "../contexts/DataContext";
 import styled from "@emotion/styled";
 import Signup from "./Signup";
 import Login from "./Login";
@@ -32,7 +33,7 @@ const GlobaStyles = ({ isLanding }) => css`
     padding: 0;
     font-family: "Roboto", "Helvetica", sans-serif;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
   }
   *,
   *::after,
@@ -85,29 +86,35 @@ function App() {
     } else {
       setIsLanding(false);
     }
-    console.log(isLanding);
   }, [location, isLanding]);
 
   return (
     <>
-      <ThemeProvider theme={themeConfig}>
-        <Global styles={GlobaStyles({ isLanding })} isLanding={isLanding} />
-        <StyledMain>
-          <Switch>
-            <PrivateRoute exact path="/" component={Dashboard} />
-            <PrivateRoute path="/about" component={About} />
-            <PrivateRoute path="/create-ad" component={CreateAd} />
-            <PrivateRoute path="/profile" component={Profile} />
-            <PrivateRoute path="/update-profile" component={UpdateProfile} />
-            <PrivateRoute path="/ad/:id" component={AdPage} />
-            <Route path="/landing" component={Landing} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
-            <Route path="/forgot-password" component={ForgotPassword} />
-          </Switch>
-          <Navigation />
-        </StyledMain>
-      </ThemeProvider>
+      <AuthProvider>
+        <DataProvider>
+          <ThemeProvider theme={themeConfig}>
+            <Global styles={GlobaStyles({ isLanding })} />
+            <StyledMain>
+              <Switch>
+                <PrivateRoute exact path="/" component={Dashboard} />
+                <PrivateRoute path="/about" component={About} />
+                <PrivateRoute path="/create-ad" component={CreateAd} />
+                <PrivateRoute path="/profile" component={Profile} />
+                <PrivateRoute
+                  path="/update-profile"
+                  component={UpdateProfile}
+                />
+                <PrivateRoute path="/ad/:id" component={AdPage} />
+                <Route path="/landing" component={Landing} />
+                <Route path="/signup" component={Signup} />
+                <Route path="/login" component={Login} />
+                <Route path="/forgot-password" component={ForgotPassword} />
+              </Switch>
+            </StyledMain>
+            <Navigation />
+          </ThemeProvider>
+        </DataProvider>
+      </AuthProvider>
     </>
   );
 }

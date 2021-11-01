@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import { StyledForm } from "./styles";
 
 export default function ForgotPassword() {
   const emailRef = useRef();
@@ -26,8 +27,7 @@ export default function ForgotPassword() {
 
   return (
     <>
-      <div>
-        <h2>Log in</h2>
+      <StyledForm>
         <form onSubmit={handleSubmit}>
           {error && <div>{error}</div>}
           {message && <div>{message}</div>}
@@ -42,16 +42,16 @@ export default function ForgotPassword() {
             />
           </fieldset>
           <button disabled={loading} type="submit">
-            Reset Password
+            Återställ lösenord
           </button>
         </form>
         <div>
           <Link to="/login">Log in</Link>
         </div>
-      </div>
-      <div>
-        Need an account? <Link to="/signup">Sign up.</Link>
-      </div>
+        <div>
+          Har du ej ett konto? <Link to="/signup">Skapa konto.</Link>
+        </div>
+      </StyledForm>
     </>
   );
 }
