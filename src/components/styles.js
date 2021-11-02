@@ -7,6 +7,7 @@ export const StyledForm = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 50%;
   & > * {
     margin: 2%;
   }
@@ -45,6 +46,7 @@ export const StyledForm = styled.div`
 
 export const StyledHeader = styled.header`
   width: 100%;
+  justify-self: flex-start;
 
   h2 {
     width: 100%;

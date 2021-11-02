@@ -12,7 +12,7 @@ export default function Login() {
   const { login } = useAuth();
   const history = useHistory();
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -20,11 +20,11 @@ export default function Login() {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       setLoading(false);
-      setTimeout(history.push("/"), 3000);
+      setTimeout(history.push("/"), 5000);
     } catch {
       setError("Failed to sign in");
     }
-  }
+  };
 
   return (
     <>

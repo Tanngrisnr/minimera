@@ -9,6 +9,7 @@ import styled from "@emotion/styled";
 
 const ProfileContainer = styled.div`
   margin-bottom: 10%;
+  width: 100%;
 `;
 
 export default function Profile() {
@@ -24,17 +25,19 @@ export default function Profile() {
     try {
       setError("");
       await logout();
-      history.push("/login");
+      history.push("/landing");
     } catch {
       setError("failed to log out");
     }
   };
   return (
     <>
-      <StyledHeader>Profile</StyledHeader>
+      <StyledHeader>
+        <h2>Min Profil</h2>
+      </StyledHeader>
       <ProfileContainer>
         {error && <div>{error}</div>}
-        <div>{currentUser.email}</div>
+
         <Button
           sx={{ marginTop: "10%" }}
           fullWidth
@@ -50,7 +53,7 @@ export default function Profile() {
           variant="contained"
           onClick={handleLogout}
         >
-          Logg ut
+          Logga ut
         </Button>
       </ProfileContainer>
       <ListAds

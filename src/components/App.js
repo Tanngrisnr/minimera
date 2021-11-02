@@ -65,10 +65,15 @@ const StyledMain = styled.main`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  width: 95%;
+  flex-basis: 90%;
+  max-width: 95%;
   margin: 0 auto;
   height: 100%;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  & > *:last-child {
+    margin-bottom: 30%;
+  }
 `;
 
 function App() {

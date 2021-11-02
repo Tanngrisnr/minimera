@@ -14,11 +14,14 @@ export default function Signup() {
   const { signup } = useAuth();
   const history = useHistory();
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
+      return setError("Lösenorden matchar ej");
+    }
+    if (groupRef.current.value === "") {
+      return setError("Du måste välja en grupp");
     }
 
     try {
@@ -30,11 +33,11 @@ export default function Signup() {
         groupRef.current.value
       );
       setLoading(false);
-      setTimeout(history.push("/"), 3000);
+      setTimeout(history.push("/"), 5000);
     } catch {
       setError("Kunde ej skapa konto");
     }
-  }
+  };
 
   return (
     <>
@@ -75,7 +78,7 @@ export default function Signup() {
             </fieldset>
 
             <select ref={groupRef} name="group" id="group">
-              <option selected disabled value="">
+              <option disabled value="">
                 Välj stadsdel
               </option>
               <option value="north">Norr</option>

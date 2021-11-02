@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import { useData } from "../contexts/DataContext";
-import { StyledLink } from "./styles";
+import { Link } from "react-router-dom";
 import { useAuth } from "./../contexts/AuthContext";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import styled from "@emotion/styled";
 
-const AdCard = styled.article`
+const AdCard = styled(Link)`
+  display: block;
   margin: 2%;
   flex-basis: 46%;
+  min-width: 130px;
+  min-height: 130px;
   background-color: #ebf4f3;
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
-  flex-grow: 0;
   padding: 5%;
+  color: black;
+  text-decoration: none;
 
   p {
-    max-height: 78px;
+    display: block;
     overflow: hidden;
     font-size: 0.8rem;
   }
@@ -27,7 +31,7 @@ const AdCard = styled.article`
     h5 {
       padding: 0;
       margin: 1%;
-      font-size: 1rem;
+      font-size: 1.1em;
       font-weight: bold;
       flex-grow: 2;
     }
@@ -42,7 +46,7 @@ const AdsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  max-width: 100%;
+  width: 100%;
 `;
 
 function AdItem({ ad }) {
@@ -59,12 +63,12 @@ function AdItem({ ad }) {
       await deleteAd(ad.adID);
       setLoading(false);
     } catch {
-      setError("failed to delete ad");
+      setError("Kunde ej ta bort annons");
     }
   };
 
   return (
-    <AdCard>
+    <AdCard to={"/ad/" + ad.adID}>
       <header>
         <h5>{ad.title}</h5>{" "}
         {currentUser.uid == ad.creatorID ? (
@@ -78,9 +82,8 @@ function AdItem({ ad }) {
           </IconButton>
         ) : null}
       </header>
-      {error && <div>{error}</div>}
+      {error && <span>{error}</span>}
       <p>{ad.description}</p>
-      <StyledLink to={"/ad/" + ad.adID}>show full ad</StyledLink>
     </AdCard>
   );
 }

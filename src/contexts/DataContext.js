@@ -73,6 +73,7 @@ export const DataProvider = ({ children }) => {
       querySnapshot.forEach((doc) => {
         listedAds.push({
           adID: doc.id,
+          creatorEmail: doc.data().creatorEmail,
           creatorID: doc.data().creatorID,
           title: doc.data().title,
           description: doc.data().description,

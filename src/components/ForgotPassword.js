@@ -20,9 +20,9 @@ export default function ForgotPassword() {
       setLoading(true);
       await resetPassword(emailRef.current.value);
       setLoading(false);
-      setMessage("Check your email inbox for further instructions");
+      setMessage("Titta i din email för vidare instruktioner.");
     } catch {
-      setError("Failed to reset");
+      setError("Reset misslyckades");
     }
   }
 

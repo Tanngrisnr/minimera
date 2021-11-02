@@ -8,7 +8,7 @@ import styled from "@emotion/styled";
 
 const AdContainer = styled.div`
   margin: 2%;
-  min-width: 200px;
+  width: 100%;
   background-color: #ebf4f3;
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;

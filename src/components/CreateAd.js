@@ -53,8 +53,8 @@ export default function CreateAd() {
         <fieldset>
           <legend>Detaljer</legend>
           <TextareaAutosize
-            minRows={4}
-            maxRows={20}
+            minRows={10}
+            maxRows={30}
             type="text"
             name="description"
             id="description"
