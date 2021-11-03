@@ -6,46 +6,55 @@ import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import styled from "@emotion/styled";
 
-const AdCard = styled(Link)`
-  display: block;
+const AdCard = styled.article`
   margin: 2%;
   flex-basis: 46%;
-  min-width: 130px;
   min-height: 130px;
+  max-height: 170px;
+  min-width: 130px;
   background-color: #ebf4f3;
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   padding: 5%;
-  color: black;
-  text-decoration: none;
 
-  p {
-    display: block;
+  a {
+    color: black;
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    font-size: 0.8rem;
+    font-size: 0.7em;
+    padding-bottom: 2%;
+    width: 100%;
   }
 
   header {
     display: flex;
     align-content: center;
+    width: 100%;
     h5 {
       padding: 0;
       margin: 1%;
-      font-size: 1.1em;
+      font-size: 1em;
       font-weight: bold;
-      flex-grow: 2;
+      flex-grow: 1;
     }
-    button {
-      justify-self: flex-end;
-    }
+  }
+  footer {
+    width: 100%;
+    display: flex;
+    align-content: flex-end;
+    justify-content: flex-end;
+    margin: 0;
   }
 `;
 
 const AdsContainer = styled.div`
-  align-content: flex-start;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  align-content: flex-start;
   width: 100%;
 `;
 
@@ -68,9 +77,13 @@ function AdItem({ ad }) {
   };
 
   return (
-    <AdCard to={"/ad/" + ad.adID}>
+    <AdCard aria-label="ad">
       <header>
-        <h5>{ad.title}</h5>{" "}
+        <h5>{ad.title}</h5>
+      </header>
+      {error && <span>{error}</span>}
+      <Link to={"/ad/" + ad.adID}>{ad.description}</Link>
+      <footer>
         {currentUser.uid == ad.creatorID ? (
           <IconButton
             size="small"
@@ -78,12 +91,10 @@ function AdItem({ ad }) {
             disabled={loading}
             onClick={handleDelete}
           >
-            <DeleteIcon />
+            <DeleteIcon fontSize="inherit" />
           </IconButton>
         ) : null}
-      </header>
-      {error && <span>{error}</span>}
-      <p>{ad.description}</p>
+      </footer>
     </AdCard>
   );
 }
