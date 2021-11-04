@@ -59,23 +59,19 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-      if (authUser) {
-        const docRef = doc(db, "users", authUser.uid);
-        getDoc(docRef)
-          .then((dbUser) => {
-            let user = {
-              ...authUser,
-              ...dbUser.data(),
-            };
-            setCurrentUser(user);
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        setLoading(false);
-      }
+      const docRef = doc(db, "users", authUser.uid);
+      getDoc(docRef)
+        .then((dbUser) => {
+          let user = {
+            ...authUser,
+            ...dbUser.data(),
+          };
+          setCurrentUser(user);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(setLoading(false));
     });
     return unsubscribe();
   }, []);

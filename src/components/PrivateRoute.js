@@ -3,22 +3,20 @@ import { Route, Redirect } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function PrivateRoute({ component: Component, ...rest }) {
-  const { currentUser, loading } = useAuth();
+  const { currentUser } = useAuth();
 
   return (
     <>
-      {!loading && (
-        <Route
-          {...rest}
-          render={(props) => {
-            return currentUser ? (
-              <Component {...props} />
-            ) : (
-              <Redirect to="/landing" />
-            );
-          }}
-        ></Route>
-      )}
+      <Route
+        {...rest}
+        render={(props) => {
+          return currentUser ? (
+            <Component {...props} />
+          ) : (
+            <Redirect to="/landing" />
+          );
+        }}
+      ></Route>
     </>
   );
 }
