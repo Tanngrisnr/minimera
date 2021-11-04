@@ -32,8 +32,11 @@ export default function Signup() {
         passwordRef.current.value,
         groupRef.current.value
       );
-      setLoading(false);
-      setTimeout(history.push("/"), 5000);
+
+      setTimeout(() => {
+        setLoading(false);
+        history.push("/");
+      }, 500);
     } catch {
       setError("Kunde ej skapa konto");
     }

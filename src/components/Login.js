@@ -19,8 +19,11 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      setLoading(false);
-      setTimeout(history.push("/"), 5000);
+
+      setTimeout(() => {
+        setLoading(false);
+        history.push("/");
+      }, 500);
     } catch {
       setError("Failed to sign in");
     }

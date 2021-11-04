@@ -34,6 +34,10 @@ const AdCard = styled.article`
     align-content: center;
     width: 100%;
     h5 {
+      width: calc(100%);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       padding: 0;
       margin: 1%;
       font-size: 1em;
