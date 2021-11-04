@@ -78,8 +78,21 @@ export function AuthProvider({ children }) {
         })
         .finally(setLoading(false));
     });
-    return unsubscribe();
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
+
+  /*   useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      user ? setCurrentUser(user) : setCurrentUser(null);
+      setLoading(false);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []); */
 
   const value = {
     loading,

@@ -36,7 +36,7 @@ export default function Signup() {
       setTimeout(() => {
         setLoading(false);
         history.push("/");
-      }, 3000);
+      }, 2000);
     } catch {
       setError("Kunde ej skapa konto");
     }

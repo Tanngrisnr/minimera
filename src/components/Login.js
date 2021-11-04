@@ -23,7 +23,7 @@ export default function Login() {
       setTimeout(() => {
         setLoading(false);
         history.push("/");
-      }, 3000);
+      }, 2000);
     } catch {
       setError("Failed to sign in");
     }
