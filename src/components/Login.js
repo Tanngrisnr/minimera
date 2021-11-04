@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { StyledForm, StyledLink } from "./styles";
 import { Button } from "@mui/material";
 
@@ -23,7 +23,7 @@ export default function Login() {
       setTimeout(() => {
         setLoading(false);
         history.push("/");
-      }, 500);
+      }, 1000);
     } catch {
       setError("Failed to sign in");
     }

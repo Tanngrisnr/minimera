@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
-  sendEmailVerification,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   updateEmail,

@@ -7,6 +7,7 @@ const LandingContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 80%;
   height: 90%;
 
   header {
@@ -14,12 +15,12 @@ const LandingContainer = styled.div`
     margin-top: 45%;
     h1 {
       text-align: center;
-      font-size: 5rem;
+      font-size: 4rem;
       width: 100%;
     }
     p {
       font-size: 1.2rem;
-      width: 75%;
+      width: 100%;
       margin: 0 auto;
       font-family: "Belleza", serif;
     }
@@ -45,7 +46,7 @@ export default function Landing() {
   return (
     <LandingContainer>
       <header>
-        <h1>Minimera</h1>
+        <h1>minimera</h1>
         <p>Låna saker av personer i din närhet istället för att köpa. </p>
       </header>
       <footer>

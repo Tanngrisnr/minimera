@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Button } from "@mui/material";
 import { StyledForm, StyledLink } from "./styles";
 
@@ -36,7 +36,7 @@ export default function Signup() {
       setTimeout(() => {
         setLoading(false);
         history.push("/");
-      }, 500);
+      }, 1000);
     } catch {
       setError("Kunde ej skapa konto");
     }

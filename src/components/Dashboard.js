@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ListAds from "./ListAds";
 import { useAuth } from "../contexts/AuthContext";
 import { useData } from "../contexts/DataContext";

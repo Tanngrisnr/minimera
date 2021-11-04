@@ -88,7 +88,7 @@ function AdItem({ ad }) {
       {error && <span>{error}</span>}
       <Link to={"/ad/" + ad.adID}>{ad.description}</Link>
       <footer>
-        {currentUser.uid == ad.creatorID ? (
+        {currentUser.uid === ad.creatorID ? (
           <IconButton
             size="small"
             sx={{ color: "black" }}
